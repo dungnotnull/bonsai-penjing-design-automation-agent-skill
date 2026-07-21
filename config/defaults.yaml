@@ -1,0 +1,57 @@
+# bonsai-penjing-design-automation default configuration
+# This file contains default values for all configuration settings.
+# Override these via ~/.bonsai/config.yaml or environment variables (BONSAI_*).
+
+# LLM model parameters
+llm:
+  model_name: claude-3-7-sonnet-20250219
+  temperature: 0.3
+  max_tokens: 8192
+  timeout_seconds: 120
+  max_retries: 3
+  enable_prompt_caching: true
+  cache_ttl_seconds: 300
+
+# Context window management
+context:
+  max_context_tokens: 200000
+  reserve_tokens: 4096
+  compression_threshold: 0.8
+  summary_model: claude-3-haiku-20250305
+
+# Feature flags
+features:
+  enable_vision_analysis: true
+  enable_crawlers: true
+  enable_auto_remediation: true
+  enable_parallel_evidence: true
+  enable_knowledge_cache: true
+  strict_quality_gates: true
+  experimental_multi_model: false
+
+# Logging configuration
+logging:
+  level: INFO
+  json_format: false
+  file_path: null
+  rotation_size_mb: 100
+  retention_days: 30
+
+# Knowledge pipeline
+knowledge:
+  crawl_interval_hours: 168  # 7 days
+  max_new_entries_per_crawl: 20
+  dedup_enabled: true
+  scoring_weights:
+    recency: 0.4
+    keyword_relevance: 0.4
+    citation_count: 0.2
+  min_confidence_score: 0.3
+
+# Harness execution
+harness:
+  max_retry_attempts_per_gate: 2
+  source_timeout_seconds: 30
+  max_clarifying_questions: 2
+  degradation_timeout_ms: 5000
+  graceful_degradation: true

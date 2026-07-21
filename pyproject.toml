@@ -1,0 +1,95 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bonsai-penjing-design-automation"
+version = "3.0.0"
+description = "Bonsai & Penjing Design Analysis & Automation (Japan, China, Vietnam Schools) — production-grade AI agent harness with modular architecture, hooks system, and tool registry"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+authors = [
+    {name = "bonsai-penjing-design-automation contributors"}
+]
+keywords = [
+    "bonsai", "penjing", "horticulture", "pruning", "landscape-design",
+    "ai-agent", "claude-code", "skill", "knowledge-base", "design-automation"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Education",
+]
+
+dependencies = [
+    "pydantic>=2.5.0",
+    "click>=8.1.0",
+    "structlog>=24.1.0",
+    "tenacity>=8.2.0",
+    "httpx>=0.27.0",
+    "feedparser>=6.0.10",
+    "python-dateutil>=2.8.2",
+    "pyyaml>=6.0",
+    "rich>=13.7.0",
+]
+
+[project.optional-dependencies]
+crawl = [
+    "crawl4ai>=0.3.0",
+    "lxml>=5.1.0",
+    "beautifulsoup4>=4.12.0",
+]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-mock>=3.12.0",
+    "mypy>=1.8.0",
+    "ruff>=0.3.0",
+    "pre-commit>=3.6.0",
+]
+
+[project.scripts]
+bonsai = "bonsai_penjing.cli:main"
+bonsai-crawl = "bonsai_penjing.cli:crawl"
+
+[project.urls]
+Homepage = "https://github.com/example/bonsai-penjing-design-automation"
+Documentation = "https://github.com/example/bonsai-penjing-design-automation#readme"
+Issues = "https://github.com/example/bonsai-penjing-design-automation/issues"
+
+[tool.setuptools.packages.find]
+include = ["bonsai_penjing", "bonsai_penjing.*"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short --strict-markers"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_ignores = true
+disallow_untyped_defs = true
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "C4", "SIM"]
+ignore = ["E501"]
